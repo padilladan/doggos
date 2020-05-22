@@ -3,10 +3,20 @@ class Api::UsersController < ApplicationController
         render "users.json.jbuilder"
     end
 
-    def create
-        @user: User.new(
-            
+    def create 
+        user = User.new(
+          first_name: params[:first_name],
+          last_name: params[:last_name],
+          doggo_id: params[:doggo_id],
+          email: params[:email],
+          password: params[:password],
+          password_confirmation: params[:password_confirmation]
         )
-
-    end
+    
+        if user.save
+          render json: {message: 'User created successfully'}, status: :created
+        else
+          render json: {errors: user.errors.full_messages}, status: :bad_request
+        end
+      end    
 end
