@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   #   get "/photos" => "photos#index"
   # end
   namespace :api do
-      get "/" => "users#welcome"
+      get "/all" => "users#index"
+      get "/user/:id" => "users#show"
 
       post "/users" => "users#create"
+      delete "/user/:id" => "users#destroy"
   end
 end
